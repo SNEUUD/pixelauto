@@ -53,6 +53,14 @@ Un rendu à la fois ; les rendus en cours reprennent après un redémarrage ; le
 de plus de 14 jours sont nettoyées. Client prêt à l'emploi :
     python3 client.py episodes/03_renault_4l.json episodes/04_fiat_500.json --out videos/
 
+## Déploiement (Coolify, Railpack)
+`railpack.json` installe ffmpeg et espeak-ng, télécharge la voix Piper pendant le
+build et lance l'API sur le port 8000 (Python 3.12, voir `.python-version`).
+Dans Coolify : Build Pack « Railpack », port 8000, variables `PIXELAUTO_API_KEY`
+(obligatoire) et `PIXELAUTO_PUBLIC_URL` (webhooks), et un stockage persistant monté
+sur `/app/jobs` (sinon les vidéos disparaissent à chaque redéploiement).
+Encodage au processeur par défaut (`PIXELAUTO_NVENC=0`).
+
 ## Sprites
 Au premier rendu, chaque sprite est exporté dans `assets/sprites/*.png`.
 Redessine-les (Aseprite, LibreSprite, Piskel) en gardant la taille : ta version

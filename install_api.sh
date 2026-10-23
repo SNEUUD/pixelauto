@@ -5,7 +5,7 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 . .venv/bin/activate
-pip install "fastapi>=0.110" "uvicorn>=0.29"
+pip install -r requirements.txt
 
 if [ ! -f .env ]; then
   KEY=$(python3 -c "import secrets; print(secrets.token_urlsafe(32))")
