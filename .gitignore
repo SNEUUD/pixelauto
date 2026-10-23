@@ -1,0 +1,33 @@
+# --- Fichiers sensibles (ne jamais versionner)
+.env
+.env.*
+config.sh
+*.pem
+*.key
+# extraits de voix pour le clonage chatterbox (--ref) : données personnelles
+*.wav
+
+# --- Environnement Python
+.venv/
+__pycache__/
+*.py[cod]
+
+# --- Téléchargés par install.sh / install_tts.sh
+voices/*.onnx
+voices/*.onnx.json
+
+# --- Sorties générées
+out/
+jobs/
+samples/
+videos/
+assets/bank/planche.png
+*.mp4
+
+# --- Divers
+*.zip
+.vscode/
+.idea/
+.DS_Store
+
+episodes/*
