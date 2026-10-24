@@ -11,7 +11,7 @@ Tout tourne en local : voix Piper (CPU), rendu Python/Pillow en 180x320 agrandi 
     ./video.sh --all                              # tous les épisodes nouveaux ou modifiés
     ./video.sh --all --force                      # tout refaire
     ./video.sh episodes/02_mazda_mx5_na.json --preview 9   # aperçu PNG rapide
-Réglages (voix, moteur, NVENC) en tête de `video.sh`, ou dans un `config.sh`.
+Réglages (voix, moteur, voix à imiter, NVENC) en tête de `video.sh`, ou dans un `config.sh`.
 NVENC est testé automatiquement : sans GPU NVIDIA, l'encodage passe au processeur.
 
 ## Écrire un épisode

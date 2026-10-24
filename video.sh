@@ -4,17 +4,19 @@
 #   ./video.sh --all                            -> rend les épisodes nouveaux ou modifiés
 #   ./video.sh --all --force                    -> les refait tous
 #   ./video.sh episodes/02_mazda_mx5_na.json --preview 9   (options de make_video.py)
-# Réglages par défaut : modifie les 3 lignes ci-dessous (ou crée config.sh avec les mêmes variables).
+# Réglages par défaut : modifie les 4 lignes ci-dessous (ou crée config.sh avec les mêmes variables).
 set -euo pipefail
 cd "$(dirname "$0")"
 VOICE="voices/fr_FR-siwis-medium.onnx"   # voix Piper
 TTS="piper"                              # piper | chatterbox
+REF=""                                   # chatterbox : extrait .wav (5-10 s) de la voix à imiter, vide = voix d'origine
 NVENC="1"                                # 1 = encodage GPU NVIDIA si disponible
 [ -f config.sh ] && . ./config.sh
 
 . .venv/bin/activate
 opts=(--voice "$VOICE" --tts "$TTS")
 [ "$NVENC" = "1" ] && opts+=(--nvenc)
+[ -n "$REF" ] && opts+=(--ref "$REF")
 
 render() { python3 make_video.py "$@" "${opts[@]}"; }
 
