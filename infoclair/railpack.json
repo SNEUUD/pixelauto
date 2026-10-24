@@ -1,0 +1,22 @@
+{
+  "$schema": "https://schema.railpack.com",
+  "buildAptPackages": ["curl"],
+  "steps": {
+    "build": {
+      "commands": [
+        "...",
+        "mkdir -p voices && curl -fsSL -o voices/fr_FR-siwis-medium.onnx https://huggingface.co/rhasspy/piper-voices/resolve/main/fr/fr_FR/siwis/medium/fr_FR-siwis-medium.onnx && curl -fsSL -o voices/fr_FR-siwis-medium.onnx.json https://huggingface.co/rhasspy/piper-voices/resolve/main/fr/fr_FR/siwis/medium/fr_FR-siwis-medium.onnx.json"
+      ]
+    }
+  },
+  "deploy": {
+    "aptPackages": ["ffmpeg", "espeak-ng", "curl"],
+    "startCommand": "uvicorn server:app --host 0.0.0.0 --port ${PORT:-8000} --no-access-log",
+    "variables": {
+      "LANG": "C.UTF-8",
+      "LC_ALL": "C.UTF-8",
+      "PYTHONUNBUFFERED": "1",
+      "INFOCLAIR_NVENC": "0"
+    }
+  }
+}

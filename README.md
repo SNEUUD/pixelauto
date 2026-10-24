@@ -1,5 +1,7 @@
 # L'auto en 8 bits — générateur de vidéos TikTok
 
+> Projet frère, même principe en style sobre pour la vulgarisation informatique : [`infoclair/`](infoclair/README.md).
+
 Tout tourne en local : voix Piper (CPU), rendu Python/Pillow en 180x320 agrandi x6
 (vrais gros pixels), musique chiptune générée, encodage ffmpeg (NVENC possible).
 

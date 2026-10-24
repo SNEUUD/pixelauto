@@ -1,0 +1,78 @@
+{
+  "id": "01_dns",
+  "title": "Le DNS",
+  "subtitle": "L'annuaire d'Internet",
+  "series": "L'info en clair",
+  "number": "01",
+  "icon": "globe",
+  "theme": "light",
+  "accent": "bleu",
+  "target_seconds": 60,
+  "scenes": [
+    {
+      "type": "title", "icon": "globe", "kicker": "Réseau",
+      "title": "Comment ton navigateur trouve un *site* ?",
+      "voice": "Tu tapes un nom de site, et la page s'affiche presque aussitôt. Mais comment ton ordinateur sait-il où aller ?",
+      "caption": "Tu tapes un nom de site, et la page s'affiche presque aussitôt. Mais comment ton ordinateur sait-il où aller ?"
+    },
+    {
+      "type": "concept", "icon": "text:DNS", "tag": "Définition",
+      "term": "DNS",
+      "definition": "Domain Name System : il traduit un nom de domaine en *adresse IP*.",
+      "match": ["traduit"],
+      "voice": "La réponse tient en trois lettres : D.N.S. Ce système traduit un nom de site en adresse I.P., le numéro de la machine.",
+      "caption": "La réponse tient en trois lettres : DNS. Ce système traduit un nom de site en adresse IP, le numéro de la machine."
+    },
+    {
+      "type": "analogy",
+      "left": {"icon": "text:DNS", "label": "Le DNS", "sub": "un nom → une adresse IP"},
+      "right": {"icon": "book", "label": "Un annuaire", "sub": "un nom → un numéro", "match": ["annuaire"]},
+      "voice": "Les machines ne parlent qu'en chiffres. Le D.N.S., c'est leur annuaire : tu donnes un nom, il te rend un numéro.",
+      "caption": "Les machines ne parlent qu'en chiffres. Le DNS, c'est leur annuaire : tu donnes un nom, il te rend un numéro."
+    },
+    {
+      "type": "flow", "back": true,
+      "nodes": [
+        {"icon": "laptop", "label": "Ton ordinateur", "sub": "« wikipedia.org ? »"},
+        {"icon": "router", "label": "Le résolveur", "sub": "souvent chez ton FAI", "match": ["résolveur"]},
+        {"icon": "server", "label": "Serveurs DNS", "sub": "racine, .org, puis le site", "match": ["racine"]},
+        {"icon": "check", "label": "L'adresse IP", "sub": "renvoyée à ton ordinateur", "match": ["adresse"], "alt": true}
+      ],
+      "voice": "Ton ordinateur demande d'abord à un résolveur, souvent chez ton fournisseur d'accès. Lui interroge les serveurs racine, puis ceux du point org, et enfin celui du site, qui renvoie l'adresse.",
+      "caption": "Ton ordinateur demande d'abord à un résolveur, souvent chez ton fournisseur d'accès. Lui interroge les serveurs racine, puis ceux du .org, et enfin celui du site, qui renvoie l'adresse."
+    },
+    {
+      "type": "stat", "icon": "server", "value": 13,
+      "label": "noms de serveurs racine",
+      "note": "copiés en plus de 1 000 exemplaires dans le monde", "match": ["copiés"],
+      "voice": "Tout en haut, il n'y a que treize noms de serveurs racine, copiés en plus de mille exemplaires dans le monde.",
+      "caption": "Tout en haut, il n'y a que 13 noms de serveurs racine, copiés en plus de 1 000 exemplaires dans le monde."
+    },
+    {
+      "type": "fact", "kicker": "1983", "icon": "file",
+      "text": "Avant le DNS, *un seul fichier* listait toutes les machines du réseau.",
+      "detail": "En 1983, Paul Mockapetris invente le DNS.", "match": ["mockapetris"],
+      "voice": "Avant lui, un seul fichier texte listait toutes les machines du réseau. En mille neuf cent quatre-vingt-trois, Paul Mockapetris invente le D.N.S.",
+      "caption": "Avant lui, un seul fichier texte listait toutes les machines du réseau. En 1983, Paul Mockapetris invente le DNS."
+    },
+    {
+      "type": "code", "style": "terminal", "title": "Essaie chez toi :",
+      "code": "$ nslookup wikipedia.org\nName:    wikipedia.org\nAddress: 185.15.58.224",
+      "highlight": [3],
+      "voice": "Essaie chez toi : tape nslookup, suivi d'un nom de site. Le terminal t'affiche son adresse I.P.",
+      "caption": "Essaie chez toi : tape nslookup, suivi d'un nom de site. Le terminal t'affiche son adresse IP."
+    },
+    {
+      "type": "outro",
+      "voice": "Et toi, quel sujet pour le prochain épisode ? Dis-le en commentaire !",
+      "caption": "Et toi, quel sujet pour le prochain épisode ? Dis-le en commentaire !"
+    }
+  ],
+  "sources": [
+    "https://www.rfc-editor.org/rfc/rfc882",
+    "https://www.rfc-editor.org/rfc/rfc1034",
+    "https://root-servers.org/",
+    "https://www.iana.org/domains/root/servers",
+    "https://fr.wikipedia.org/wiki/Domain_Name_System"
+  ]
+}

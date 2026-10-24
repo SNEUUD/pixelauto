@@ -1,0 +1,70 @@
+{
+  "id": "02_ram",
+  "title": "La mémoire vive",
+  "subtitle": "RAM ou stockage ?",
+  "series": "L'info en clair",
+  "number": "02",
+  "icon": "ram",
+  "theme": "dark",
+  "accent": "violet",
+  "target_seconds": 60,
+  "scenes": [
+    {
+      "type": "title", "icon": "ram", "kicker": "Matériel",
+      "title": "16 Go de RAM, *ça veut dire quoi ?*",
+      "voice": "Seize gigas de RAM, cinq cent douze gigas de stockage. Deux mémoires, deux rôles très différents.",
+      "caption": "16 Go de RAM, 512 Go de stockage. Deux mémoires, deux rôles très différents."
+    },
+    {
+      "type": "analogy", "title": "Imagine une cuisine",
+      "left": {"icon": "ram", "label": "La RAM", "sub": "le plan de travail"},
+      "right": {"icon": "folder", "label": "Le stockage", "sub": "les placards", "match": ["placards"]},
+      "voice": "La RAM, c'est ton plan de travail : ce que tu utilises maintenant, à portée de main. Le stockage, ce sont les placards : tout est rangé, mais plus loin.",
+      "caption": "La RAM, c'est ton plan de travail : ce que tu utilises maintenant, à portée de main. Le stockage, ce sont les placards : tout est rangé, mais plus loin."
+    },
+    {
+      "type": "versus",
+      "left": {"icon": "ram", "label": "RAM", "points": ["Très rapide", "S'efface à l'extinction", "Quelques Go"]},
+      "right": {"icon": "disk", "label": "SSD", "points": ["Plus lent", "Garde tout", "Des centaines de Go"], "match": ["ssd"]},
+      "voice": "La RAM est très rapide, mais elle s'efface quand tu éteins. Le S.S.D. est plus lent, mais il garde tout, même sans courant.",
+      "caption": "La RAM est très rapide, mais elle s'efface quand tu éteins. Le SSD est plus lent, mais il garde tout, même sans courant."
+    },
+    {
+      "type": "flow", "layout": "row", "title": "Quand tu ouvres une appli",
+      "nodes": [
+        {"icon": "disk", "label": "Stockage"},
+        {"icon": "ram", "label": "RAM", "match": ["copiée"]},
+        {"icon": "cpu", "label": "Processeur", "match": ["processeur"]}
+      ],
+      "voice": "Quand tu ouvres une appli, elle est copiée du stockage vers la RAM, où le processeur peut y accéder très vite.",
+      "caption": "Quand tu ouvres une appli, elle est copiée du stockage vers la RAM, où le processeur peut y accéder très vite."
+    },
+    {
+      "type": "code", "file": "notes.py", "title": "Côté code",
+      "code": "notes = [12, 15, 9]   # en RAM\n\nwith open(\"notes.txt\", \"w\") as f:\n    f.write(str(notes))  # sur le disque",
+      "highlight": [4],
+      "voice": "Même chose en programmation : une variable vit en RAM. Pour la garder après l'extinction, il faut l'écrire dans un fichier.",
+      "caption": "Même chose en programmation : une variable vit en RAM. Pour la garder après l'extinction, il faut l'écrire dans un fichier."
+    },
+    {
+      "type": "list", "title": "Quand la RAM est pleine",
+      "items": [
+        {"text": "Le système déborde sur le disque", "match": ["déborde"]},
+        {"text": "Tout *ralentit*", "match": ["ralentit"]},
+        {"text": "Ferme les onglets inutiles", "match": ["onglets"], "style": "check"}
+      ],
+      "voice": "Et quand la RAM est pleine ? Le système déborde sur le disque, bien plus lent, et tout ralentit. Le réflexe : fermer les onglets inutiles.",
+      "caption": "Et quand la RAM est pleine ? Le système déborde sur le disque, bien plus lent, et tout ralentit. Le réflexe : fermer les onglets inutiles."
+    },
+    {
+      "type": "outro",
+      "voice": "Et toi, quel sujet pour le prochain épisode ? Dis-le en commentaire !",
+      "caption": "Et toi, quel sujet pour le prochain épisode ? Dis-le en commentaire !"
+    }
+  ],
+  "sources": [
+    "https://fr.wikipedia.org/wiki/M%C3%A9moire_vive",
+    "https://fr.wikipedia.org/wiki/Solid-state_drive",
+    "https://fr.wikipedia.org/wiki/M%C3%A9moire_virtuelle"
+  ]
+}
