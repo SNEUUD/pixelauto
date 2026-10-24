@@ -24,12 +24,6 @@ for ext in onnx onnx.json; do
   [ -f "voices/${VOICE}.${ext}" ] || curl -L -o "voices/${VOICE}.${ext}" "${BASE}/${VOICE}.${ext}"
 done
 
-# Kokoro (voix plus naturelle, CPU) : --tts kokoro
-KOKORO="https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0"
-for f in kokoro-v1.0.onnx voices-v1.0.bin; do
-  [ -f "voices/$f" ] || curl -L -o "voices/$f" "$KOKORO/$f"
-done
-
 echo
 echo "OK. Pour générer la vidéo :"
 echo "  . .venv/bin/activate"

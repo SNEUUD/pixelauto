@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Génère la même phrase avec chaque voix disponible, pour choisir à l'oreille.
 
-    python3 compare_voices.py                      # toutes les voix Piper de voices/ (+ kokoro, chatterbox si installés)
+    python3 compare_voices.py                      # toutes les voix Piper de voices/ (+ chatterbox si installé)
     python3 compare_voices.py --ref ma_voix.wav    # chatterbox imite ta voix (5-10 s, sans musique)
 
 Sortie : samples/<voix>.wav — écoute-les et choisis.
@@ -25,9 +25,7 @@ def main():
     out = ROOT / "samples"
     out.mkdir(exist_ok=True)
 
-    jobs = [("piper", m) for m in sorted((ROOT / "voices").glob("*.onnx")) if m.with_suffix(".onnx.json").exists()]
-    if (ROOT / "voices" / "kokoro-v1.0.onnx").exists():
-        jobs.append(("kokoro", None))
+    jobs = [("piper", m) for m in sorted((ROOT / "voices").glob("*.onnx"))]
     try:
         import chatterbox  # noqa: F401
         jobs.append(("chatterbox", None))
@@ -35,7 +33,7 @@ def main():
         print("(chatterbox non installé : bash install_tts.sh pour l'ajouter)")
 
     for tts, model in jobs:
-        name = model.stem if model else {"kokoro": "kokoro", "chatterbox": "chatterbox_clone" if args.ref else "chatterbox"}[tts]
+        name = model.stem if model else ("chatterbox_clone" if args.ref else "chatterbox")
         t0 = time.time()
         v = audio.Voice(model, tts=tts, ref=args.ref)
         data = v.say(args.text, out / f"_{name}.wav")

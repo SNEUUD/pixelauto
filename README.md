@@ -1,6 +1,6 @@
 # L'auto en 8 bits — générateur de vidéos TikTok
 
-Tout tourne en local : voix Piper ou Kokoro (CPU), rendu Python/Pillow en 180x320 agrandi x6
+Tout tourne en local : voix Piper (CPU), rendu Python/Pillow en 180x320 agrandi x6
 (vrais gros pixels), musique chiptune générée, encodage ffmpeg (NVENC possible).
 
 ## Installation (une fois)
@@ -12,9 +12,6 @@ Tout tourne en local : voix Piper ou Kokoro (CPU), rendu Python/Pillow en 180x32
     ./video.sh --all --force                      # tout refaire
     ./video.sh episodes/02_mazda_mx5_na.json --preview 9   # aperçu PNG rapide
 Réglages (voix, moteur, NVENC) en tête de `video.sh`, ou dans un `config.sh`.
-Moteurs de voix (`TTS`) : `piper` (défaut), `kokoro` (plus naturel, toujours sur le
-processeur, voix `ff_siwis`), `chatterbox` (le plus naturel, GPU, voir `install_tts.sh`).
-Pour comparer à l'oreille : `python3 compare_voices.py` (-> `samples/`).
 NVENC est testé automatiquement : sans GPU NVIDIA, l'encodage passe au processeur.
 
 ## Écrire un épisode
@@ -57,12 +54,12 @@ de plus de 14 jours sont nettoyées. Client prêt à l'emploi :
     python3 client.py episodes/03_renault_4l.json episodes/04_fiat_500.json --out videos/
 
 ## Déploiement (Coolify, Railpack)
-`railpack.json` installe ffmpeg et espeak-ng, télécharge les voix Piper et Kokoro pendant le
+`railpack.json` installe ffmpeg et espeak-ng, télécharge la voix Piper pendant le
 build et lance l'API sur le port 8000 (Python 3.12, voir `.python-version`).
 Dans Coolify : Build Pack « Railpack », port 8000, variables `PIXELAUTO_API_KEY`
 (obligatoire) et `PIXELAUTO_PUBLIC_URL` (webhooks), et un stockage persistant monté
 sur `/app/jobs` (sinon les vidéos disparaissent à chaque redéploiement).
-Encodage au processeur par défaut (`PIXELAUTO_NVENC=0`). Voix plus naturelle : `PIXELAUTO_TTS=kokoro`.
+Encodage au processeur par défaut (`PIXELAUTO_NVENC=0`).
 
 ## Sprites
 Au premier rendu, chaque sprite est exporté dans `assets/sprites/*.png`.

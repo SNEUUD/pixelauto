@@ -15,7 +15,6 @@ __pycache__/
 # --- Téléchargés par install.sh / install_tts.sh
 voices/*.onnx
 voices/*.onnx.json
-voices/*.bin
 
 # --- Sorties générées
 out/

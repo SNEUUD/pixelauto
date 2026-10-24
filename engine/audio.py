@@ -1,4 +1,4 @@
-"""Voix off (Piper ou Kokoro, repli espeak-ng) + musique chiptune générée + mixage."""
+"""Voix off (Piper TTS, repli espeak-ng) + musique chiptune générée + mixage."""
 import shutil
 import subprocess
 import wave
@@ -7,8 +7,6 @@ from pathlib import Path
 import numpy as np
 
 SR = 44100
-VOICES = Path(__file__).resolve().parent.parent / "voices"
-KOKORO_VOICE = "ff_siwis"   # seule voix française de Kokoro
 
 
 # ------------------------------------------------------------ voix
@@ -53,8 +51,7 @@ def _trim(data):
 
 
 class Voice:
-    """Moteurs : piper (rapide, CPU), kokoro (plus naturel, CPU), chatterbox (le plus naturel, GPU),
-    espeak-ng (secours)."""
+    """Moteurs : piper (rapide, CPU), chatterbox (plus naturel, GPU), espeak-ng (secours)."""
 
     def __init__(self, model=None, length_scale=1.0, tts="piper", ref=None,
                  exaggeration=0.5, cfg_weight=0.5):
@@ -63,7 +60,7 @@ class Voice:
         self.tts = tts
         self.ref = str(ref) if ref else None
         self.exaggeration, self.cfg_weight = exaggeration, cfg_weight
-        self._piper = self._cb = self._kokoro = None
+        self._piper = self._cb = None
         self._cache = {}
         if tts == "chatterbox":
             import torch
@@ -74,13 +71,6 @@ class Voice:
             except TypeError:
                 self._cb = ChatterboxMultilingualTTS.from_pretrained(device=dev)
             print(f"[voix] chatterbox sur {dev}")
-            return
-        if tts == "kokoro":
-            from kokoro_onnx import Kokoro
-            model, voices = VOICES / "kokoro-v1.0.onnx", VOICES / "voices-v1.0.bin"
-            if not model.exists() or not voices.exists():
-                raise SystemExit(f"Modèle Kokoro absent de {VOICES} : relance install.sh.")
-            self._kokoro = Kokoro(str(model), str(voices))
             return
         if self.model and self.model.exists():
             try:
@@ -95,8 +85,6 @@ class Voice:
     def engine(self):
         if self._cb:
             return "chatterbox"
-        if self._kokoro:
-            return f"kokoro ({KOKORO_VOICE})"
         return f"piper ({self.model.stem})" if self._piper else "espeak-ng"
 
     def say(self, text, out_wav):
@@ -112,10 +100,6 @@ class Voice:
                 _write_wav(out_wav, arr, self._cb.sr)
                 self._cache[text] = _trim(_read_wav(out_wav))
             return _atempo(self._cache[text], 1 / self.length_scale, out_wav.parent)
-        if self._kokoro:
-            data, sr = self._kokoro.create(text, voice=KOKORO_VOICE, speed=1 / self.length_scale, lang="fr-fr")
-            _write_wav(out_wav, data, sr)
-            return _trim(_read_wav(out_wav))
         if self._piper:
             from piper import SynthesisConfig
             cfg = SynthesisConfig(length_scale=self.length_scale, noise_scale=0.667, noise_w_scale=0.8)
