@@ -8,7 +8,7 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 VOICE="voices/fr_FR-siwis-medium.onnx"   # voix Piper
-TTS="piper"                              # piper | chatterbox
+TTS="piper"                              # piper | kokoro (plus naturel) | chatterbox (GPU)
 NVENC="1"                                # 1 = encodage GPU NVIDIA si disponible
 [ -f config.sh ] && . ./config.sh
 

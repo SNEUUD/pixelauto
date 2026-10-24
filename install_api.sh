@@ -16,7 +16,7 @@ PIXELAUTO_HOST=127.0.0.1        # 0.0.0.0 pour l'ouvrir au réseau local
 PIXELAUTO_PORT=8000
 PIXELAUTO_PUBLIC_URL=http://127.0.0.1:8000   # adresse utilisée dans les liens envoyés aux webhooks
 PIXELAUTO_VOICE=voices/fr_FR-siwis-medium.onnx
-PIXELAUTO_TTS=piper
+PIXELAUTO_TTS=piper              # piper | kokoro (plus naturel) | chatterbox (GPU)
 PIXELAUTO_NVENC=1
 PIXELAUTO_KEEP_DAYS=14          # les vidéos plus vieilles sont supprimées au démarrage
 EOF

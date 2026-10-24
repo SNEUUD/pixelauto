@@ -167,13 +167,13 @@ def main():
     ap.add_argument("episode", help="fichier JSON de l'épisode")
     ap.add_argument("-o", "--out", help="chemin du .mp4 de sortie")
     ap.add_argument("--voice", default=str(ROOT / "voices" / "fr_FR-siwis-medium.onnx"),
-                    help="modèle Piper .onnx (sinon espeak-ng)")
-    ap.add_argument("--tts", choices=["piper", "chatterbox"], default="piper",
-                    help="moteur de voix (chatterbox : plus naturel, GPU, voir install_tts.sh)")
+                    help="modèle Piper .onnx (sinon espeak-ng ; ignoré par kokoro et chatterbox)")
+    ap.add_argument("--tts", choices=["piper", "kokoro", "chatterbox"], default="piper",
+                    help="moteur de voix (kokoro : plus naturel, CPU ; chatterbox : le plus naturel, GPU)")
     ap.add_argument("--ref", help="chatterbox : extrait .wav de 5-10 s d'une voix à imiter (la tienne)")
     ap.add_argument("--exaggeration", type=float, default=0.5, help="chatterbox : expressivité 0.3-0.8")
     ap.add_argument("--cfg", type=float, default=0.5, help="chatterbox : 0.3 = débit plus posé")
-    ap.add_argument("--speed", type=float, default=1.0, help="length_scale Piper de départ (<1 = plus rapide)")
+    ap.add_argument("--speed", type=float, default=1.0, help="length_scale Piper/Kokoro de départ (<1 = plus rapide)")
     ap.add_argument("--target", type=float, help="durée visée en secondes (défaut : celle de l'épisode)")
     ap.add_argument("--nvenc", action="store_true", help="encodage GPU NVIDIA (si disponible)")
     ap.add_argument("--no-bank", "--no-ai", dest="no_bank", action="store_true",
